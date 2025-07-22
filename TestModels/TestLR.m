@@ -1,5 +1,5 @@
 % Load dataset
-data = readtable('electric_vehicles_spec_2025cop.csv');
+data = readtable('electric_vehicles_spec_2025(in).csv');
 
 % Select two numeric features and the target variable
 X = data(:, {'battery_capacity_kWh', 'efficiency_wh_per_km'});
