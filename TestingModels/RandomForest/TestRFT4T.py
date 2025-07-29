@@ -27,6 +27,7 @@ X_encoded = pd.get_dummies(X, columns=cata_cols)  # One-hot encoding
 le = LabelEncoder()
 y_encoded = le.fit_transform(y)  # Encode target variable
 all_labels = list(range(len(le.classes_)))
+class_names = le.classes_
 
 # Split the dataset into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(X_encoded, y_encoded, test_size=0.3, random_state=42)
@@ -43,5 +44,16 @@ report = classification_report(y_test, y_pred, labels=all_labels, target_names=l
 # Print the results
 print(f"Accuracy: {accuracy:.2f}")
 print("Classification Report:\n", report)
+
+# Plot heatmap
+plt.figure(figsize=(12, 10))
+sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues', xticklabels=class_names, yticklabels=class_names)
+plt.xlabel('Predicted Segment')
+plt.ylabel('Actual Segment')
+plt.title('Confusion Matrix Heatmap for Vehicle Segment Classification')
+plt.xticks(rotation=45, ha='right')
+plt.yticks(rotation=0)
+plt.tight_layout()
+plt.show()
 
 
